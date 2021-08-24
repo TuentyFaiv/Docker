@@ -5,20 +5,31 @@ services:
     build:
       context: .
     ports:
-    - 5000:5000
+    - 4000:4000
     volumes:
-    - ./:/app
-
-  mysqldb:
-    image: mysql
-    ports:
-    - 3306:3306
+    - ./src:/app
     environment:
-    - MYSQL_ROOT_PASSWORD=p@ssw0rd1
-    volumes:
-    - mysql:/var/lib/mysql
-    - mysql_config:/etc/mysql
+      FLASK_DEGUB: 1
+      FLASK_ENV: development
+      FLASK_APP: main.py
+    entrypoint:
+    - python3
+    - main.py
+    # - flask
+    # - run
+    # - --host=0.0.0.0
+    # - --port=4000
 
-volumes:
-  mysql:
-  mysql_config:
+#   mysqldb:
+#     image: mysql
+#     ports:
+#     - 3306:3306
+#     environment:
+#     - MYSQL_ROOT_PASSWORD=p@ssw0rd1
+#     volumes:
+#     - mysql:/var/lib/mysql
+#     - mysql_config:/etc/mysql
+
+# volumes:
+#   mysql:
+#   mysql_config:
